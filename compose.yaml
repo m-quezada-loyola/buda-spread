@@ -1,0 +1,22 @@
+version: '3.8'
+services:
+  mongodb:
+    image: 'mongo'
+    volumes:
+      - data:/data/db
+    env_file:
+      - ./env/mongo.env
+  backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    ports:
+      - '3000:3000'
+    env_file:
+      - ./env/backend.env
+    depends_on:
+      - mongodb
+    volumes:
+      - ./backend:/app
+volumes:
+  data:
