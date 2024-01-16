@@ -22,7 +22,7 @@ El principal supuesto que se realizó fue que la alerta de spread se requiere in
 Para poder utilizar la aplicación primero es necesario clonar el repositorio:
 
 ```
-git clone url https://github.com/m-quezada-loyola/buda-spread.git
+git clone https://github.com/m-quezada-loyola/buda-spread.git
 ```
 Luego, es necesario entrar al directorio del repositorio:
 
