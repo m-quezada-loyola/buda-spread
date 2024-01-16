@@ -20,7 +20,7 @@ describe("POST /spread/:marketId/alert", () => {
   describe("given a correct market with no alert", () => {
     const market = "btc-clp";
     const spreadAlertData = {
-      value: 30000,
+      alert_value: 30000,
     };
     const endpoint = `/spreads/${market}/alert`;
     it("respond with a 200 status code", async () => {
@@ -33,7 +33,7 @@ describe("POST /spread/:marketId/alert", () => {
     });
     it("respond with market spread alert value", async () => {
       const response = await request(app).post(endpoint).send(spreadAlertData);
-      expect(response.body).toHaveProperty("value");
+      expect(response.body).toHaveProperty("alert_value");
     });
   });
   describe("given a correct market with alert", () => {
