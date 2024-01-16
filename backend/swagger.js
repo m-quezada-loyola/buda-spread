@@ -8,11 +8,6 @@ const options = {
       title: "Buda Spread API",
       description:
         "API que entrega los spreads de mercado entre distintos pares de dívisas.",
-      contact: {
-        name: "Matías Quezada",
-        email: "m.quezada.loyola@gmail.com",
-        url: "https://github.com/m-quezada-loyola",
-      },
       version: "1.0.0",
     },
     servers: [
