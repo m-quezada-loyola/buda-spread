@@ -89,7 +89,7 @@ router.get("/spreads/:marketId", catchAsync(spreadsController.getMarketSpread));
  *             alert_value: 5000.45
  *     responses:
  *      200:
- *        description: Created
+ *        description: Alerta creada.
  *        content:
  *          application/json:
  *            schema:
