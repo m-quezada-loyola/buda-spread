@@ -4,6 +4,11 @@ const spreadsController = require("../controllers/spreadController");
 const catchAsync = require("../utils/CatchAsync");
 const { validateSpreadAlert } = require("../middleware/validations");
 
+
+router.get("/", (req, res) => {
+    res.send("Buda Spread API");
+})
+
 /**
  * @openapi
  * /spreads:
