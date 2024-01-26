@@ -163,4 +163,6 @@ router.post("/spreads/:marketId/alert", validateSpreadAlert, catchAsync(spreadsC
  */
 router.get("/spreads/:marketId/alert", catchAsync(spreadsController.getMarketSpreadStatus));
 
+router.put("/spreads/:marketId/alert", catchAsync(spreadsController.updateAlertValue))
+
 module.exports = router;

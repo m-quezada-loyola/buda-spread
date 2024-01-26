@@ -19,6 +19,7 @@ module.exports.getMarketSpread = async (req, res) => {
 };
 
 module.exports.getMarketSpreadStatus = async (req, res) => {
+  const url = "	https://webhook.site/d1dd7051-82b9-4122-a07f-3ac445309925"
   const { marketId } = req.params;
   const marketTicker = await budaService.getMarketTicker(marketId);
   const { market } = spreadService.calculateMarketSpread(marketTicker);
@@ -28,7 +29,7 @@ module.exports.getMarketSpreadStatus = async (req, res) => {
   if (!alert) {
     throw new ExpressError(`Bad request. ${marketId} has no alert`, 400);
   }
-  const alertValue = alert['alert_value']
+  const alertValue = alert["alert_value"];
   const status =
     market["spread"] > alertValue
       ? "Higher"
@@ -44,6 +45,11 @@ module.exports.getMarketSpreadStatus = async (req, res) => {
       spread: market["spread"],
     },
   };
+
+  const response = await fetch(url, {
+    method: "POST",
+    body: JSON.stringify({marketSpreadStatus})
+  })
 
   res.json(marketSpreadStatus);
 };
@@ -69,5 +75,19 @@ module.exports.setSpreadAlert = async (req, res) => {
     const newSpreadAlert = new spreadAlert(spreadAlertData);
     await newSpreadAlert.save();
     res.json(spreadAlertData);
+  }
+};
+
+module.exports.updateAlertValue = async (req, res) => {
+  const { marketId } = req.params;
+  const { alert_value: alertValue } = req.body;
+  const marketTicker = await budaService.getMarketTicker(marketId);
+  if (marketTicker) {
+    const alert = await spreadAlert.findOneAndUpdate({market_id: marketId}, {alert_value: alertValue})
+    if (!alert) {
+      throw new ExpressError(`Market ${marketId} has no alert.`, 404)
+    }
+    alert.save()
+    res.json({message: "Alerta actualizada"})
   }
 };
